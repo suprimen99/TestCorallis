@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 14, 2023 at 09:54 AM
+-- Generation Time: Apr 15, 2023 at 01:05 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -29,11 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `username` varchar(128) NOT NULL,
-  `email` varchar(128) NOT NULL,
-  `password` varchar(128) NOT NULL,
+  `username` varchar(128) DEFAULT NULL,
+  `email` varchar(128) DEFAULT NULL,
+  `password` varchar(128) DEFAULT NULL,
   `image` varchar(128) NOT NULL,
-  `create_add` int(11) NOT NULL
+  `create_add` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `image`, `create_add`) VALUES
-(8, 'Muhamad supriyanto', 'suprianto6599@gmail.com', '$2y$10$Fu34f1DF.vWLaFmUzeIs3eNG3KV68WxDqOD4ru.WayQkhIi3KYwbS', 'default.jpg', 1681423151);
+(20, 'Suprianto', 'msuprianto603@gmail.com', '$2y$10$VVOT//e..AUZ6jbmRVpv9OLgcRlqfJNEVW1e9tY6zXIzAAmxYl9.q', 'suprianto2.png', 1681513155);
 
 --
 -- Indexes for dumped tables
@@ -62,7 +62,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

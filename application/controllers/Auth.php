@@ -82,7 +82,7 @@ class Auth extends CI_Controller {
     }else{
         $config['upload_path'] = './assets/img/profile/';
         $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size'] = 2043;
+        $config['max_size'] = 10000;
         $this->load->library('upload', $config);
         $upload_image = $_FILES['image']['name'];
         if($upload_image){
