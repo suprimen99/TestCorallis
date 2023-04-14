@@ -14,7 +14,7 @@
 						<div class="form-group row">
 							<label for="username" class="col-sm-2 col-form-label">Username</label>
 							<div class="col-lg-10">
-								<input type="username" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter username" name="username" value="<?= $user['username'];?>">
+								<input type="username" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter username" name="username" value="<?= set_value('username'); ?>">  <?= form_error('username','<small class="text-danger">','</small>')?>
 							</div>
 						</div>
 						<div class="form-group row">

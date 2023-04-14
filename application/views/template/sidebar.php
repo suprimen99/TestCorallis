@@ -32,13 +32,13 @@
 	
 	<!-- Nav Item - Tables -->
 	<li class="nav-item">
-		<a class="nav-link" href="tables.html">
-			<i class="fas fa-solid fa-recycle"></i>
+		<a class="nav-link" href="<?= base_url('User/changePassword')?>">
+			<i class="fas fa-fw fa-key"></i>
 			<span>Change Password</span></a>
 	</li>
 	<!-- Nav Item - Tables -->
 	<li class="nav-item">
-		<a class="nav-link" href="<?= base_url('Auth/logout')?>" onclick="return confirm('Yakin Ingin Logout < ?= $item['username'] ?> ?')" >
+		<a class="nav-link" href="<?= base_url('Auth/logout')?>" onclick="return confirm('Yakin Ingin Logout <?= $user['username'] ?> ?')" >
 		<i class="fas fa-solid fa-power-off"></i>
 			<span>Logout</span></a>
 	</li>
