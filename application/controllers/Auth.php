@@ -13,6 +13,9 @@ class Auth extends CI_Controller {
 
 	public function index()
 	{
+		if($this->session->userdata('email')){
+			redirect('user');
+		}
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', [
 			'valid_email' => 'email invalid!'
 		]);
@@ -21,9 +24,9 @@ class Auth extends CI_Controller {
 
 		if($this->form_validation->run() == false){
 
-			$this->load->view('template/header', $data);
+			$this->load->view('template/authheader', $data);
 			$this->load->view('Auth/login.php');
-			$this->load->view('template/footer');
+			$this->load->view('template/authfooter');
 		}else{
 			$this->_login();
 		}
@@ -38,7 +41,18 @@ class Auth extends CI_Controller {
 		$user = $this->db->get_where('users', ['email' => $email])->row_array();
 		
 		if($user){
-			redirect('user');
+			if(password_verify($password, $user['password'])){
+				$data = [
+					'email' => $user['email']
+				];
+				$this->session->set_userdata($data);
+				redirect('user');
+			}else{
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+			Email is not registered!!
+		  </div>');
+		  redirect('auth');
+			}
 		}else{
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
 			Email is not registered!!
@@ -49,6 +63,9 @@ class Auth extends CI_Controller {
 
 	public function registrasi()
 	{
+		if($this->session->userdata('email')){
+			redirect('user');
+		}
 		$this->form_validation->set_rules('username', 'Username', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[users.email]');
         $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]',[
@@ -59,13 +76,13 @@ class Auth extends CI_Controller {
 
 		if($this->form_validation->run() == false){
 			$data['title'] = 'Halaman Registration';
-			$this->load->view('template/header', $data);
+			$this->load->view('template/authheader', $data);
 			$this->load->view('Auth/register.php');
-			$this->load->view('template/footer');
+			$this->load->view('template/authfooter');
 		}else{
 			$data = [
-				'username' => $this->input->post('username'),
-				'email' => $this->input->post('email'),
+				'username' => htmlspecialchars($this->input->post('username', true)),
+				'email' => htmlspecialchars($this->input->post('email', true)),
 				'image' => 'default.jpg',
 				'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
 				'create_add' => time()
@@ -78,7 +95,7 @@ class Auth extends CI_Controller {
 			redirect('auth');
 		}
 	}
-
+	
 	public function logout()
 	{
 		$this->session->unset_userdata('email');
@@ -87,4 +104,5 @@ class Auth extends CI_Controller {
 		  </div>');
 			redirect('auth');
 	}
+	
 }
